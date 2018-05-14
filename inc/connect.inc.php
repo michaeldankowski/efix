@@ -1,5 +1,5 @@
 <?php
-
+if (!defined('PARENT')) die('Ty hackerze za dychę :P');
 $host = "localhost";
 $db_user = "root";
 $db_password ="";
