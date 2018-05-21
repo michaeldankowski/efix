@@ -1,76 +1,43 @@
 <?php
-    session_start();
+
 define('PARENT', true);
 $dostepPoZalogowaniu = true;
 require_once 'inc/naglowek.inc.php';
 require_once "inc/connect.inc.php";
-
-    if(isset($_POST['Marka']))
+$id=$_GET['id'];
+$id1=$_GET['id1'];
+    if(isset($_POST['Kwota']))
     {
         // udana walidaja
         $OK=true;
 
-        ///Marka
-        $Marka=$_POST['Marka'];
-        if((strlen($Marka)<3)||(strlen($Marka)>20))
+       
+        $Data_wizyty=$_POST['Data_wizyty'];
+
+  
+        $Godzina_wizyty=$_POST['Godzina_wizyty'];
+        if((($Godzina_wizyty)<7)||(($Godzina_wizyty)>18))
         {
             $OK=false;
-            $_SESSION['e_marka']='Marka musi posiadać od 3 do 20 znaków';       
+            $_SESSION['e_wizyta']=' Warsztat pracuje od 7 do 18';       
         }
-        if(preg_match("/[^A-z]/",$Marka))
+        if(!preg_match("/[0-9]/",$Godzina_wizyty))
         {
             $OK=false;
-            $_SESSION['e_marka']="Imię nie może zawierać cyfr";
+            $_SESSION['e_wizyta']="Model może zawierać tylko cyfry";
         }
 
-        ///Model
-        $Model=$_POST['Model'];
-        if((strlen($Model)<3)||(strlen($Model)>30))
-        {
-            $OK=false;
-            $_SESSION['e_model']=' Model musi posiadać od 3 do 30 znaków';       
-        }
-        if(preg_match("/[^A-z]/",$Model))
-        {
-            $OK=false;
-            $_SESSION['e_model']="Model nie może zawierać cyfr";
-        }
-        ///Rocznik
-        $Rocznik=$_POST['Rocznik'];
-        if (!preg_match('/^[0-9]{4}$/',$Rocznik))
-        {  
-            $OK=false;
-            $_SESSION['e_rocznik']="Rocznik może zawierać same cyfry  ";
-        }
-        ///Pojemność Silnika
-        $Poj_silnika=$_POST['Poj_silnika'];
-        if (!preg_match('/^[0-9]{4}$/',$Poj_silnika))
-        {  
-            $OK=false;
-            $_SESSION['e_poj_silnika']="Pojemność Silnika może zawierać same cyfry  ";
-        }
-
-   
-        $VIN=$_POST['VIN'];
-
-        if(!preg_match("/[^A-z][0-9]/",$VIN))
-        {
-            $OK=false;
-            $_SESSION['e_vin']="VIN może zawierac litery, cyfry";
-        }
+        $Opis_wizyty=$_POST['Opis_wizyty'];
 
         
-        ///Pojemność Silnika
-        $Moc_silnika=$_POST['Moc_silnika'];
-        if (preg_match('/^[0-9]{4}$/',$Moc_silnika))
+        $Kwota=$_POST['Kwota'];
+        if (!preg_match('/^[0-9]{1,5}$/',$Kwota))
         {  
             $OK=false;
-            $_SESSION['e_moc_silnika']="Moc Silnika może zawierać same cyfry  ";
+            $_SESSION['e_kwota']="Kwota może mieć maksymalnie 5 cyfr  ";
         }
 
       
-        
-
         mysqli_report(MYSQLI_REPORT_STRICT);
         try
         {
@@ -84,10 +51,11 @@ require_once "inc/connect.inc.php";
                 
                 if($OK==true)
                 {
-                    if($polaczenie->query("Insert into pojazd values(NULL,'$Marka','$Model','$Rocznik','$Poj_silnika','$VIN','$Moc_silnika')"))
+                   echo "$id.$id1.'1'.$Data_wizyty.$Godzina_wizyty.$Opis_wizyty.$Kwota";
+                    if($polaczenie->query("Insert into wizyta_w_warsztacie VALUES(NULL,'$id','$id1',1,'$Data_wizyty','$Godzina_wizyty','$Opis_wizyty','$Kwota')"))
                     {
                       $_SESSION['udana rejestracja']=true;
-                      header('Location:pojazdy.php');
+                      header('Location:klienci.php');
                     }
                     ELSE
                     {
@@ -119,7 +87,7 @@ require_once "inc/connect.inc.php";
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-        
+<link rel="stylesheet" type="text/css" href="css/php.css">               
         <style>
             .error{
                 color:red;
@@ -130,66 +98,34 @@ require_once "inc/connect.inc.php";
     </head>
     <body>
 <nav class="navbar navbar-expand-sm bg-light">
-<?php
-echo file_get_contents('menu.html'); 
-?>
+    <?php        require_once 'inc/tpl/menu.inc.php'; ?>
+
 </nav>        
         
-        
-<?php
- 	$polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
 
-	$zapytanie = mysqli_query ("SELECT * FROM kli_prac");
- 
-while($option = mysqli_fetch_assoc($zapytanie)) {
-
-echo '<option value="'.$option['Imie'].'">'.$option['Nazwisko'].'</option>';
-
-}
-        $polaczenie->close();
-	?>
 <form method="POST" >
-<b>Model:</b><br> <input type="text" name="Model"><br>
+<b>Data wizyty:</b><br> <input type="date" name="Data_wizyty"><br>
+
+<b>Godzina wizyty</b><br> <input type="text"  name="Godzina_wizyty" maxlength="2" ><br>
 <?php 
-if (isset($_SESSION['e_model']))
+if (isset($_SESSION['e_wizyta']))
 {
-    echo '<div class="error">'.$_SESSION['e_model'].'</div>';
-    unset($_SESSION['e_model']);
+    echo '<div class="error">'.$_SESSION['e_wizyta'].'</div>';
+    unset($_SESSION['e_wizyta']);
 }
 ?>
-<b>Rocznik</b><br> <input type="text"  name="Rocznik" maxlength="4" ><br>
+<b>Opis wizyty:</b><br> <input type="text" name="Opis_wizyty" maxlength="50"><br>
+
+<b>Kwota:</b><br> <input type="text" name="Kwota" maxlength="5"><br>
 <?php 
-if (isset($_SESSION['e_rocznik']))
+if (isset($_SESSION['e_kwota']))
 {
-    echo '<div class="error">'.$_SESSION['e_rocznik'].'</div>';
-    unset($_SESSION['e_rocznik']);
+    echo '<div class="error">'.$_SESSION['e_kwota'].'</div>';
+    unset($_SESSION['e_kwota']);
 }
 ?>
-<b>Pojemność silnika cm3:</b><br> <input type="text" name="Poj_silnika" maxlength="4"><br>
-<?php 
-if (isset($_SESSION['e_poj_silnika']))
-{
-    echo '<div class="error">'.$_SESSION['e_poj_silnika'].'</div>';
-    unset($_SESSION['e_poj_silnika']);
-}
-?>
-<b>VIN:</b><br> <input type="text" name="VIN" maxlength="17"><br>
-<?php 
-if (isset($_SESSION['e_vin']))
-{
-    echo '<div class="error">'.$_SESSION['e_vin'].'</div>';
-    unset($_SESSION['e_vin']);
-}
-?>
-<b>Moc silnika:</b><br> <input type="text" name="Moc_silnika" maxlength="4"><br>
-<?php 
-if (isset($_SESSION['e_moc_silnika']))
-{
-    echo '<div class="error">'.$_SESSION['e_moc_silnika'].'</div>';
-    unset($_SESSION['e_moc_silnika']);
-}
-?>
-<input type="submit" value="Dodaj pojazd" name="Dodaj">
+
+<input type="submit" value="Dodaj wizytę" name="Dodaj">
 </form>
 
 

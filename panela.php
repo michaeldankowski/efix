@@ -38,7 +38,7 @@ require_once "connect.php";
         echo "<p>Witaj ".$_SESSION['Imie']." ".$_SESSION['Nazwisko']."</p>";
         
 
-        $sql = "SELECT * FROM wizyta_w_warsztacie natural join kli_prac natural join pojazd natural join stanowisko where id_KliPrac = '".$_SESSION['ID']."'";
+        $sql = "SELECT * FROM wizyta_w_warsztacie natural join kli_prac natural join pojazd natural join stanowisko ";
 
         if($result = mysqli_query($polaczenie, $sql)){
     if(mysqli_num_rows($result) > 0){

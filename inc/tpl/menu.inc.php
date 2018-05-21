@@ -1,4 +1,4 @@
-<?php var_dump($menuRoles[$_SESSION['Rola']]) ?>
+<?php // var_dump($menuRoles[$_SESSION['Rola']]) ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-end fixed-top" id="navbar-top">
     <div class="container">
         <a class="navbar-brand" href="panel.php"><img src="img/logo.png" alt="logo"></a>
@@ -34,27 +34,7 @@
                 <?php endforeach; ?>
 
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Pojazdy</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="pojazdy.php">Pojazdy</a>
-                        <a class="dropdown-item" href="dodawaniepojazdu.php">Dodawanie pojazdu</a>
-
-                    </div>
-
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#oferta">Oferta</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Rejestracja</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#galeria">Galeria</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="logout.php">Wyloguj</a>
-                </li>
+           
             </ul>
         </div>
     </div>

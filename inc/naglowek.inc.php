@@ -10,23 +10,25 @@ if (isset($dostepPoZalogowaniu) && $dostepPoZalogowaniu === true && (!isset($_SE
 
 $menuRoles = array(
     1 => array(
-        array('url' => 'panel.php', 'label' => 'home'),
+        array('url' => 'panela.php', 'label' => 'Wizyty'),
         array('url' => '#', 'label' => 'Pojazdy', 'submenu' => array(
-            array('url' => 'pojazdy.php', 'label' => 'pojazdy'),
-            array('url' => 'dodawaniepojazdu.php', 'label' => 'dodawanie pojazdu')
+            array('url' => 'pojazdy.php', 'label' => 'Pojazdy'),
+            array('url' => 'dodawaniepojazdu.php', 'label' => 'Dodawanie pojazdu')
         )),
-        array('url' => 'witamy.php', 'label' => 'oferta'),
+        array('url' => 'klienci.php', 'label' => 'Klienci'),
+
+        
         array('url' => 'logout.php', 'label' => 'Wyloguj'),
     ),
     // Rola 2
     2 => array(
-        array('url' => 'witamy.php', 'label' => 'home'),
-        array('url' => '#', 'label' => 'Pojazdy111', 'submenu' => array(
-            array('url' => 'pojazdy.php', 'label' => 'pojazdy'),
-            array('url' => 'dodawaniepojazdu.php', 'label' => 'dodawanie pojazdu')
+        array('url' => 'panel.php', 'label' => 'Wizyty'),
+        array('url' => '#', 'label' => 'Pojazdy', 'submenu' => array(
+            array('url' => 'pojazdy.php', 'label' => 'Pojazdy'),
+            array('url' => 'dodawaniepojazdu.php', 'label' => 'Dodawanie pojazdu')
         )),
-        array('url' => 'witamy.php', 'label' => 'oferta'),
-        array('url' => 'witamy.php', 'label' => 'itd ...'),
+        array('url' => 'edycjadanychk.php', 'label' => 'Edycja danych klienta'),
+        array('url' => 'logout.php', 'label' => 'Wyloguj'),
     ),    
 );
 /* 

@@ -24,8 +24,10 @@ require_once "inc/connect.inc.php";
 <?php
 require_once('inc/tpl/menu.inc.php'); 
 ?>
+        
         <?php
-        $sql = "SELECT * FROM pojazd where id_KliPrac = '".$_SESSION['ID']."'";
+        $id=$_GET['id'];
+        $sql = "SELECT * FROM pojazd where id_KliPrac = '".$id."'";
 
         if($result = mysqli_query($polaczenie, $sql)){
     if(mysqli_num_rows($result) > 0){
@@ -37,17 +39,22 @@ require_once('inc/tpl/menu.inc.php');
                 echo "<th>Pojemność silnika</th>";
                 echo "<th>VIN</th>";
                 echo "<th>Moc silnika</th>";
+                echo "<th>Dodawanie wizyty</th>";
+                echo "<th>Edycja Pojazdu</th>";
+                echo "<th>Usuwanie Pojazdu</th>";
             echo "</tr>";
         while($row = mysqli_fetch_array($result)){
             echo "<tr>";
-                $id=$row['id_Poj'];
+                $id1=$row['id_Poj'];
+                
                 echo "<td>" . $row['Marka'] . "</td>";
                 echo "<td>" . $row['Model'] . "</td>";
                 echo "<td>" . $row['Rocznik'] . "</td>";
                 echo "<td>" . $row['Poj_silnika'] . "</td>";
                 echo "<td>" . $row['VIN'] . "</td>";
-                echo "<td>" . $row['Moc_silnika'] . "</td>";           
-                echo "<td>" . $row['Moc_silnika'] . "</td>";     
+                echo "<td>" . $row['Moc_silnika'] . "</td>";        
+                echo '<td><a href="dodawaniewizyty.php?id='.$id.'&id1='.$id1.'">Dodaj wizytę</a></td>';  
+                echo '<td><a href="dodawaniewizyty.php?id='.$id.$id1. '">Edytuj Pojazd</a></td>';    
                 echo '<td><a href="delete.php?id='.$id. '">Usun</a></td>';     
             echo "</tr>";
         }

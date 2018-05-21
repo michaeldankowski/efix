@@ -1,23 +1,11 @@
+
 <?php
-/*
-session_start();
-
-if(!isset($_SESSION['zalogowany']))
-{
-    header('location:logowanie.php');
-    exit();
-    
-}
-	require_once "connect.php";
-
-	$polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
-
-
-*/
+//session_start();
 define('PARENT', true);
 $dostepPoZalogowaniu = true;
 require_once 'inc/naglowek.inc.php';
-require_once "connect.php";
+require_once "inc/connect.inc.php";
+
 ?>
 
 <!DOCTYPE HTML>
@@ -30,46 +18,42 @@ require_once "connect.php";
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/php.css">            
+ <link rel="stylesheet" type="text/css" href="css/php.css">       
     </head>
     <body>
-        <?php        require_once 'inc/tpl/menu.inc.php'; ?>
+<?php
+require_once('inc/tpl/menu.inc.php'); 
+?>
         <?php
-        echo "<p>Witaj ".$_SESSION['Imie']." ".$_SESSION['Nazwisko']."</p>";
-        
-
-        $sql = "SELECT * FROM wizyta_w_warsztacie natural join kli_prac natural join pojazd natural join stanowisko where id_KliPrac = '".$_SESSION['ID']."'";
+        $sql = "SELECT * FROM kli_prac where Rola = '2' ";
 
         if($result = mysqli_query($polaczenie, $sql)){
     if(mysqli_num_rows($result) > 0){
-        echo '<table class="table">';
+        echo "<table class='table'>";
             echo "<tr>";
                 echo "<th>Imię</th>";
                 echo "<th>Nazwisko</th>";
-                echo "<th>Marka</th>";
-                echo "<th>Model</th>";
-                echo "<th>Opis Stanowiska</th>";
-                echo "<th>Data wizyty</th>";
-                echo "<th>Godzina wizyty</th>";
-                echo "<th>Opis czynnośći</th>";
-                echo "<th>Kwota [zł]</th>";
+                echo "<th>Pesel</th>";
+                echo "<th>Telefon</th>";
+                echo "<th>Adres</th>";
+                echo "<th>Email</th>";
             echo "</tr>";
         while($row = mysqli_fetch_array($result)){
             echo "<tr>";
+                $id=$row['id_KliPrac'];
                 echo "<td>" . $row['Imie'] . "</td>";
                 echo "<td>" . $row['Nazwisko'] . "</td>";
-                echo "<td>" . $row['Marka'] . "</td>";
-                echo "<td>" . $row['Model'] . "</td>";
-                echo "<td>" . $row['Opis_stanowiska'] . "</td>";
-                echo "<td>" . $row['Data_wizyty'] . "</td>";
-                echo "<td>" . $row['Godzina_wizyty'] . "</td>";
-                echo "<td>" . $row['Opis_wizyty'] . "</td>";
-                echo "<td>" . $row['Kwota'] . "</td>";
-                
+                echo "<td>" . $row['Pesel'] . "</td>";
+                echo "<td>" . $row['Telefon'] . "</td>";
+                echo "<td>" . $row['Adres'] . "</td>";
+                echo "<td>" . $row['Email'] . "</td>";           
+                echo '<td><a href="pojazdya.php?id='.$id. '">Pojazdy</a></td>';
+                echo '<td><a href="delete.php?id='.$id. '">Edytuj</a></td>';
+                echo '<td><a href="deleteklienci.php?id='.$id. '">Usun</a></td>';     
             echo "</tr>";
         }
         echo "</table>";
-        // Free result set
+
         mysqli_free_result($result);
     } else{
         echo "No records matching your query were found.";
@@ -81,6 +65,7 @@ require_once "connect.php";
 // Close connection
 mysqli_close($polaczenie);
         ?>
+        
         
     </body>
 </html>
