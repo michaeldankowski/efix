@@ -53,9 +53,12 @@ require_once "connect.php";
                 echo "<th>Godzina wizyty</th>";
                 echo "<th>Opis czynnośći</th>";
                 echo "<th>Kwota [zł]</th>";
+                echo "<th>Edytuj wizytę</th>";
+                echo "<th>Usuń wizytę</th>";
             echo "</tr>";
         while($row = mysqli_fetch_array($result)){
             echo "<tr>";
+                $id=$row['id_wizyta'];    
                 echo "<td>" . $row['Imie'] . "</td>";
                 echo "<td>" . $row['Nazwisko'] . "</td>";
                 echo "<td>" . $row['Marka'] . "</td>";
@@ -65,6 +68,8 @@ require_once "connect.php";
                 echo "<td>" . $row['Godzina_wizyty'] . "</td>";
                 echo "<td>" . $row['Opis_wizyty'] . "</td>";
                 echo "<td>" . $row['Kwota'] . "</td>";
+                echo '<td><a href=".php?id='.$id. '">Edytuj</a></td>';
+                echo '<td><a href="deletewizyta.php?id='.$id. '">Usun</a></td>';    
                 
             echo "</tr>";
         }

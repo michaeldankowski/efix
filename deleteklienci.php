@@ -9,7 +9,7 @@ $id=$_GET['id'];
 echo $id;
              $polaczenie->query ("DELETE FROM kli_prac WHERE id_KliPrac='".$id."'");
    
-echo "Rekord zaktualizowany";
+             header('Location:klienci.php');
 $polaczenie->close();
 
 ?>

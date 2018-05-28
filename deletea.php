@@ -5,13 +5,11 @@
         	require_once "connect.php";
 	$polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
 
-$id=$_GET['id'];
+$id=$_GET['id1'];
 echo $id;
-             $polaczenie->query ("DELETE FROM wizyta_w_warsztacie WHERE id_wizyta='".$id."'");
+             $polaczenie->query ("DELETE FROM pojazd WHERE id_Poj='".$id."'");
    
-//echo "Rekord zaktualizowany";
-             header('Location:panela.php');
+header('Location:pojazdya.php');
 $polaczenie->close();
-
 
 ?>

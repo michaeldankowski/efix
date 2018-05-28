@@ -37,6 +37,8 @@ require_once('inc/tpl/menu.inc.php');
                 echo "<th>Pojemność silnika</th>";
                 echo "<th>VIN</th>";
                 echo "<th>Moc silnika</th>";
+                echo "<th>Edytuj wizytę</th>";
+                echo "<th>Usuń wizytę</th>";
             echo "</tr>";
         while($row = mysqli_fetch_array($result)){
             echo "<tr>";
@@ -48,7 +50,8 @@ require_once('inc/tpl/menu.inc.php');
                 echo "<td>" . $row['VIN'] . "</td>";
                 echo "<td>" . $row['Moc_silnika'] . "</td>";           
                 echo "<td>" . $row['Moc_silnika'] . "</td>";     
-                echo '<td><a href="delete.php?id='.$id. '">Usun</a></td>';     
+                echo '<td><a href=".php?id='.$id. '">Usun</a></td>';     
+                echo '<td><a href="deletewizyta.php?id='.$id. '">Usun</a></td>';     
             echo "</tr>";
         }
         echo "</table>";

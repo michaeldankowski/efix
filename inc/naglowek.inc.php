@@ -11,12 +11,15 @@ if (isset($dostepPoZalogowaniu) && $dostepPoZalogowaniu === true && (!isset($_SE
 $menuRoles = array(
     1 => array(
         array('url' => 'panela.php', 'label' => 'Wizyty'),
-        array('url' => '#', 'label' => 'Pojazdy', 'submenu' => array(
+        array('url' => 'klienci.php', 'label' => 'Klienci'),
+                array('url' => '#', 'label' => 'Pojazdy', 'submenu' => array(
             array('url' => 'pojazdy.php', 'label' => 'Pojazdy'),
             array('url' => 'dodawaniepojazdu.php', 'label' => 'Dodawanie pojazdu')
         )),
-        array('url' => 'klienci.php', 'label' => 'Klienci'),
-
+        array('url' => '#', 'label' => 'Dane', 'submenu' => array(
+            array('url' => 'dane.php', 'label' => 'Dane'),
+            array('url' => 'edycjadanychk.php', 'label' => 'Edycja danych')
+        )),
         
         array('url' => 'logout.php', 'label' => 'Wyloguj'),
     ),
@@ -27,7 +30,10 @@ $menuRoles = array(
             array('url' => 'pojazdy.php', 'label' => 'Pojazdy'),
             array('url' => 'dodawaniepojazdu.php', 'label' => 'Dodawanie pojazdu')
         )),
-        array('url' => 'edycjadanychk.php', 'label' => 'Edycja danych klienta'),
+        array('url' => '#', 'label' => 'Dane', 'submenu' => array(
+            array('url' => 'dane.php', 'label' => 'Dane'),
+            array('url' => 'edycjadanychk.php', 'label' => 'Edycja danych')
+        )),
         array('url' => 'logout.php', 'label' => 'Wyloguj'),
     ),    
 );

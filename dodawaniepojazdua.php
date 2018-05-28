@@ -3,7 +3,7 @@
 $dostepPoZalogowaniu = true;
 require_once 'inc/naglowek.inc.php';
 require_once "inc/connect.inc.php";
-$id=$_SESSION['ID'];
+$id=$_GET['id'];
     if(isset($_POST['Marka']))
     {
         // udana walidaja
@@ -14,7 +14,7 @@ $id=$_SESSION['ID'];
         if((strlen($Marka)<3)||(strlen($Marka)>20))
         {
             $OK=false;
-            $_SESSION['e_marka']='Marka musi posiadać od 3 do 20 znaków';  
+            $_SESSION['e_marka']='Marka musi posiadać od 3 do 20 znaków';       
         }
         if(preg_match("/[^A-z]/",$Marka))
         {
@@ -83,7 +83,6 @@ $id=$_SESSION['ID'];
                 
                 if($OK==true)
                 {
-                    
                     if($polaczenie->query("Insert into pojazd values(NULL,'$id','$Marka','$Model','$Rocznik','$Poj_silnika','$VIN','$Moc_silnika')"))
                     {
                       $_SESSION['udana rejestracja']=true;
@@ -136,7 +135,7 @@ $id=$_SESSION['ID'];
 
   
         
-      
+        
 
 <form method="POST" >
 <b>Marka:</b><br> <input type="text" name="Marka"><br>
@@ -146,7 +145,6 @@ if (isset($_SESSION['e_marka']))
     echo '<div class="error">'.$_SESSION['e_marka'].'</div>';
     unset($_SESSION['e_marka']);
 }
-
 ?>
 <b>Model:</b><br> <input type="text" name="Model"><br>
 <?php 
