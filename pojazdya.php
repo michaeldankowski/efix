@@ -57,7 +57,7 @@ require_once('inc/tpl/menu.inc.php');
                 echo '<td><a href="dodawaniewizyty.php?id='.$id.'&id1='.$id1.'">Dodaj wizytę</a></td>'; 
                 echo '<td><a href="dodawaniepojazdua.php?id='.$id.'">Dodaj Pojazd</a></td>'; 
                 echo '<td><a href="edycjapojazdua.php?id='.$id1.'">Edytuj Pojazd</a></td>';    
-                echo '<td><a href="delete.php?id='.$id1. '">Usun</a></td>';     
+                echo '<td><a href="deletea.php?id='.$id1. '">Usun</a></td>';     
             echo "</tr>";
         }
         echo "</table>";

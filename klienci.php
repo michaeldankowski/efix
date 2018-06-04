@@ -48,7 +48,7 @@ require_once('inc/tpl/menu.inc.php');
                 echo "<td>" . $row['Adres'] . "</td>";
                 echo "<td>" . $row['Email'] . "</td>";           
                 echo '<td><a href="pojazdya.php?id='.$id. '">Pojazdy</a></td>';
-                echo '<td><a href="delete.php?id='.$id. '">Edytuj</a></td>';
+                echo '<td><a href="edycjadanych.php?id='.$id. '">Edytuj</a></td>';
                 echo '<td><a href="deleteklienci.php?id='.$id. '">Usun</a></td>';     
             echo "</tr>";
         }
